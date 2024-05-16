@@ -1,0 +1,48 @@
+
+/** 
+ *  SUM_ARRAY HUFF EXERCISE
+ *
+ *  
+ *  The task is to write within the `MAIN` macro below, write a functionality that takes an array of uint256 as an 
+ *  argument and returns the sum of all the numbers
+ *
+ *  NOTICE: The contract should revert when an unrecognized function is called
+ */
+
+#define function sumArray(uint256[]) payable returns(uint256)
+
+#define macro SUMARRAY() = takes(0) returns (0) {
+
+
+}
+
+#define macro MAIN() = takes(0) returns(0) {
+    0x00 calldataload 0xE0 shr          // [func_sig]
+
+    dup1 __FUNC_SIG(sumArray) eq sumArrayJump jumpi
+
+    // Revert if no match is found.
+    0x00 dup1 revert
+
+    sumArrayJump:
+        SUMARRAY()
+}
+
+    // 0x04          
+    // calldataload     // load first 32 bytes onto the stack
+    // 0x24
+    // calldataload     // load 1 onto the stack
+    // mul              // mul numbers and put the result onto the stack
+
+    // // Push the maximum value of uint256 onto the stack
+    // dup1
+    // 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    // // Compare the result with the maximum value
+    // gt wrap_up jumpi
+    
+    // // Revert if overflow is detected
+    // 0x00 0x00 revert
+
+    // wrap_up:
+    //     0x00 mstore           // place the result in memory
+    //     0x20 0x00 return      // return the result
